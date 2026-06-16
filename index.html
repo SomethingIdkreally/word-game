@@ -1,0 +1,167 @@
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+
+
+.popup {
+    animation: popup 0.3s ease;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0.4);
+        
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        
+    }
+}
+        body {
+            font-family: "Chelsea Market", sans-serif;
+            margin: 20px;
+            background-color: green;
+            text-align: center;
+           
+        }
+        h1 {
+            font-size: 100px;
+            color: #eeff00;
+             -webkit-text-stroke: 2px black;when 
+        }
+        button {
+            font-family: inherit;
+            font-size: 30px;
+            color: #134400;
+            background-color: #eeff00;
+            cursor: pointer;
+            transform: scale(1);
+            transition: transform 0.05s ease;
+            border-radius: 10px;its
+        }
+
+        button:hover {
+            transform: scale(1.2);
+           
+        }
+        button:active {
+    transform: scale(0.95);
+}
+        #randomWord {
+            margin: 20px;
+            font-size: 100px;
+            color: #ffffff;
+             -webkit-text-stroke: 2px black;
+  text-shadow: 0 0 5px currentColor,
+             0 0 15px currentColor,
+             0 0 30px currentColor;
+             0 0 60px currentColor;
+        }
+        #typedWord {
+            margin: 100px;
+            font-size: 40px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        #result {
+            margin: -20px;
+            font-size: 40px;
+            color: #1900ff;
+             -webkit-text-stroke: 1px black;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1> Test</h1>
+    <button onclick="Word()">Random Word</button>
+    <p id="randomWord">CLICK THE BUTTON</p>
+    <input id="typedWord" placeholder="Type the word here"></input>
+    <p id="result">Waiting</p>
+</body>
+<script>
+let colors = [
+"rgb(255, 0, 0)",   
+"rgb(0, 255, 0)",   
+"rgb(0, 0, 255)"   
+];
+let words = [
+"Dragon", "Rocket", "Castle", "Thunder", "Galaxy",
+"Pirate", "Ninja", "Wizard", "Meteor", "Shadow",
+"Crystal", "Volcano", "Laser", "Storm", "Crown",
+"Tiger", "Robot", "Zombie", "Castle", "Rainbow",
+"Ocean", "Forest", "Mountain", "Desert", "Iceberg",
+"Comet", "Galaxy", "Nebula", "Star", "Planet",
+"Spider", "Eagle", "Wolf", "Lion", "Shark",
+"Bear", "Panther", "Falcon", "Hawk", "Dragonfly",
+"Blaze", "Frost", "Spark", "Inferno", "Storm",
+"Shadow", "Echo", "Flash", "Spike", "Blade",
+"Arrow", "Shield", "Sword", "Crown", "Throne",
+"King", "Queen", "Knight", "Castle", "Empire",
+"Pixel", "Glitch", "Code", "System", "Matrix",
+"Virus", "Bot", "AI", "Circuit", "Chip",
+"Energy", "Power", "Force", "Gravity", "Speed",
+"Light", "Dark", "Void", "Space", "Time",
+"Dream", "Night", "Day", "Sun", "Moon",
+"Cloud", "Rain", "Storm", "Wind", "Fire",
+"Water", "Earth", "Stone", "Metal", "Gold",
+"Silver", "Diamond", "Ruby", "Emerald", "Sapphire"
+];
+
+let CanClick = true;
+function Word() {
+if (!CanClick) return;
+CanClick = false;
+    const randomIndex = Math.floor(Math.random() * words.length);
+let r = Math.floor(Math.random() * 256);
+let g = Math.floor(Math.random() * 256);
+let b = Math.floor(Math.random() * 256);
+let RandomColors = `rgb(${r}, ${g}, ${b})`;
+       let text = document.getElementById("randomWord");
+       text.style.opacity = 1;
+    text.innerText = words[randomIndex];
+    text.style.color = RandomColors;
+        text.classList.remove("popup");
+
+    void text.offsetWidth; // restart animation
+
+    text.classList.add("popup");
+document.getElementById("typedWord").value = "";
+setTimeout(() => {
+    text.style.opacity = 0;
+    CanClick = true;
+}, 500);
+}
+function CheckAnswer() {
+let input = document.getElementById("typedWord").value;
+let word = document.getElementById("randomWord").innerText;
+if (input.toLowerCase() == word.toLowerCase()) {
+    
+document.getElementById("result").innerText = "Correct!";
+document.getElementById("result").style.color = "#00ff00";
+
+} else {
+document.getElementById("result").innerText = "Wrong!";
+document.getElementById("result").style.color = "#ff0000";
+
+}
+}
+document.getElementById("typedWord").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        CheckAnswer();
+        setTimeout(() => {
+            document.getElementById("result").innerText = "Waiting";
+            document.getElementById("result").style.color = "#ffffff";
+        }, 1000);
+    }
+});
+</script>
+</html>
